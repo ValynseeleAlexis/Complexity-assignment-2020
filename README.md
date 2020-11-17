@@ -1,5 +1,4 @@
 # Complexity-assignment-2020
-![Texte alternatif](./Screenshots/banner.png "Banner")
 
 University assignment about computational complexity theory
 
@@ -14,4 +13,6 @@ University assignment about computational complexity theory
   -python3-tk (for gui plot viewing)
   
   1. **installing the requirements**
-  pip install -r requirements.txt
+  <br> pip install -r requirements.txt
+  
+  ![Texte alternatif](./Screenshots/banner.png "Banner")

@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#Auteur Valynseele Alexis
+#Licence 3 Informatique
 
 import sys
 import numpy
@@ -84,5 +86,8 @@ def main(n,step,nb):
 
 if __name__ == "__main__":
         #argv1 = n data, argv2 = step of n; argv3 = number of tests
-        main(sys.argv[1],sys.argv[2],sys.argv[3])
+        if(len(sys.argv) < 4):
+            print("Utilisation : n step nb\nn maxixum \nstep saut entre chaque n\nnb nombre de tests a réaliser avec les même paramètres\nExemple 30 1 1 va réaliser un test qui executra hanoi pour n allant de 1 à 30 et ceux 1 fois")
+        else:
+            main(sys.argv[1],sys.argv[2],sys.argv[3])
         

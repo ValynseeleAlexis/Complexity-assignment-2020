@@ -1,4 +1,6 @@
 #!/usr/bin/python
+#Auteur Valynseele Alexis
+#Licence 3 Informatique
 
 import sys
 import numpy

@@ -1,0 +1,20 @@
+Runtime of the hanoi program for n going from 0 to 15
+
+n = 1	Runtime = 6.949994713068008e-07
+n = 2	Runtime = 9.420000424142927e-07
+n = 3	Runtime = 1.0299991117790341e-06
+n = 4	Runtime = 1.544001861475408e-06
+n = 5	Runtime = 2.802000381052494e-06
+n = 6	Runtime = 5.542999133467674e-06
+n = 7	Runtime = 1.0847998055396602e-05
+n = 8	Runtime = 4.289400021662004e-05
+n = 9	Runtime = 4.292399898986332e-05
+n = 10	Runtime = 9.819700062507764e-05
+n = 11	Runtime = 0.00016604499978711829
+n = 12	Runtime = 0.00037105400042491965
+n = 13	Runtime = 0.0007960120019561145
+n = 14	Runtime = 0.00141515200084541
+n = 15	Runtime = 0.0031738439975015353
+
+
+Total runtime of the test session is 0.006273266997595783 seconds

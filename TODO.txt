@@ -1,2 +1,6 @@
 DATE DE RENDU:
 22 decembre 
+
+COURBE DE TENDANCE:
+
+oui essayez de la mettre sur la meme figure. Cf cours pour des explications. L'idee est de déterminer un a barre (une moyenne des constantes definie par Tmesure(n) / Ttheorique(n).

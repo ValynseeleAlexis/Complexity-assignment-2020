@@ -24,7 +24,7 @@ def hanoiExecution(n:int):
     end = timer()
     return (end-start)
 
-#Run one or several tests and return the results and write them to the disk
+#Run one test and return the results and write them to the disk
 #n data,id ,nb number of test,step is the step between each n
 def test(n:int,id:int,nb:int,step:int):
     n = int(n)

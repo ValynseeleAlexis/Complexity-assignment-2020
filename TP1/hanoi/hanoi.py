@@ -25,7 +25,7 @@ def hanoiExecution(n:int):
     return (end-start)
 
 #Run one or several tests and return the results and write them to the disk
-#n data,id du test,nb nombre de test,step le step entre chaque n
+#n data,id ,nb number of test,step is the step between each n
 def test(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
@@ -36,7 +36,7 @@ def test(n:int,id:int,nb:int,step:int):
             runtime = hanoiExecution(i)
             results.append(runtime)
             print(f"n = {i}\tRuntime = {runtime}", file=f)
-            print(f"test n{id}/{nb} : {i} / {n} [OK]")
+            #print(f"test n{id}/{nb} : {i} / {n} [OK]")
         end = timer()
         print(f"\n\nTotal runtime of the test session is {(end-start)} seconds", file=f)
         print(f"\nTotal runtime of the test session is {(end-start)} seconds")
@@ -47,7 +47,6 @@ def plotting(results,n:int,nb:int,step:int):
     #Setting up the plot
     fig, (ax1,ax2) = plt.subplots(1,2)
     x1 = range(1,n+step,step)
-    x2 = numpy.linspace(1,n)
     
     #Plotting our results
     for i in range(0,nb):	
@@ -58,8 +57,11 @@ def plotting(results,n:int,nb:int,step:int):
     ax1.grid()
     
     # Reference graph (theoric complexity)
-    ax2.plot(x2,pow(2,x2))
-    
+    y2 = []
+    for i in range (1,n+step,step) :
+        #Choisir la fonction de référence ici
+        y2.append(pow(i,2))
+    ax2.plot(x1,y2)
     ax2.set(xlabel='n', ylabel='time (s)',
     title='O(n^2)')
     ax2.grid()
@@ -87,7 +89,7 @@ def main(n,step,nb):
 if __name__ == "__main__":
         #argv1 = n data, argv2 = step of n; argv3 = number of tests
         if(len(sys.argv) < 4):
-            print("Utilisation : n step nb\nn maxixum \nstep saut entre chaque n\nnb nombre de tests a réaliser avec les même paramètres\nExemple 30 1 1 va réaliser un test qui executra hanoi pour n allant de 1 à 30 et ceux 1 fois")
+            print("Utilisation : n step nb\nn maxixum \nstep pas entre chaque n\nnb nombre de tests a réaliser avec les même paramètres\nExemple 30 1 1 va réaliser un test qui executra hanoi pour n allant de 1 à 30 et ceux 1 fois")
         else:
             main(sys.argv[1],sys.argv[2],sys.argv[3])
         

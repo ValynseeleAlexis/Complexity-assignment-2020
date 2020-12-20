@@ -91,7 +91,7 @@ def suiteLogaExecution(n:int):
     end = timer()
     return (end-start)
 
-#Run one test and return the results and write them to the disk
+#Run one test and return the results and write it to the disk
 #n data,id du test,nb nombre de test,step le step entre chaque n
 def testRecu(n:int,id:int,nb:int,step:int):
     n = int(n)
@@ -109,7 +109,7 @@ def testRecu(n:int,id:int,nb:int,step:int):
         print(f"\nTotal runtime of the test session is {(end-start)} seconds")
         return results
 
-#Run one test and return the results and write them to the disk
+#Run one test and return the results and write it to the disk
 #n data,id du test,nb nombre de test,step le step entre chaque n
 def testIteratif(n:int,id:int,nb:int,step:int):
     n = int(n)
@@ -133,7 +133,7 @@ def testLoga(n:int,id:int,nb:int,step:int):
     with open(f'suiteLoga_results_n{id}.txt','w') as f:
         print(f'Runtime of the suite program for n going from 0 to {n}\n', file=f)
         start = timer()
-        for i in range(1,n+step,step):
+        for i in range(0,n+step,step):
             runtime = suiteLogaExecution(i)
             results.append(runtime)
             print(f"n = {i}\tRuntime = {runtime}", file=f)
@@ -147,26 +147,54 @@ def testLoga(n:int,id:int,nb:int,step:int):
 def plotting(results1,results2,results3,n:int,nb:int,step:int):
     #Setting up the plot
     fig, (ax1,ax2) = plt.subplots(1,2)
-    x1 = range(1,n+step,step)
+    x1 = range(0,n+step,step)
+
+    #Calcul moyenne de tout les tests
+    moyenne1 = [] #Moyenne des tests itératifs
+    moyenne2 = [] #Moyenne des tests récursif
+    moyenne3 = [] #Moyenne des test logarithmique
+    calulMoyenne1 = 0
+    calulMoyenne2 = 0
+    calulMoyenne3 = 0
+    for i in range(0,len(x1)):
+        for j in range(0,nb):
+            calculMoyenne1 = calulMoyenne1  + results1[j][i]
+            #calculMoyenne2 = calulMoyenne2  + results2[j][i]
+            #calculMoyenne3 = calulMoyenne3  + results3[j][i]
+        calculMoyenne1 / nb
+        #calculMoyenne2 / nb
+        #calculMoyenne3 / nb
+        moyenne1.append(calculMoyenne1)
+        #moyenne2.append(calculMoyenne2)
+        #moyenne3.append(calculMoyenne3)
+    with open(f'suiteLogarithmique_moyenne.txt','w') as f:
+        print(f'Average runtime of the hanoi program for n going from 0 to {n} with {nb} tests\n', file=f)
+        for i in range(0,len(x1)):
+            print(f"n = {i*step}\tRuntime = {moyenne1[i]}", file=f)
+
+
     #Plotting our results
-    for i in range(0,nb):
+    #for i in range(0,nb):
         #Selectionnez quels tests vous voulez graph
-        ax1.plot(x1,results1[i], label=f'test n°{i+1} iteratif')
+        #ax1.plot(x1,results1[i], label=f'test n°{i+1} iteratif')
         #ax1.plot(x1,results2[i], label=f'test n°{i+1} recursif')
-        ax1.plot(x1,results3[i], label=f'test n°{i+1} logarithmique')
+        #ax1.plot(x1,results3[i], label=f'test n°{i+1} logarithmique')
+    ax1.plot(x1,moyenne1,label=f'moyenne de {nb} tests itératif')
+    #ax1.plot(x1,moyenne2,label=f'moyenne de {nb} tests recursif')
+    #ax1.plot(x1,moyenne3,label=f'moyenne de {nb} tests logarithmique')
     ax1.set(xlabel=f'n with a step of {step}', ylabel='time (s)',
-    title='Suite complexity test')
+    title='Fibonnaci')
     ax1.legend()
     ax1.grid()
 
     # Reference graph (theoric complexity)
     y2 = []
-    for i in range (1,n+step,step) :
+    for i in range (0,n+step,step) :
         #Choisir la fonction de référence ici
-        y2.append(math.log(i))
+        y2.append(i)
     ax2.plot(x1,y2)  
     ax2.set(xlabel='n', ylabel='time (s)',
-    title='O(log(n))')
+    title='O(n)')
     ax2.grid()
     
     #Saving results
@@ -194,8 +222,8 @@ def main(n,step,nb):
         results1.append(testIteratif(n,i+1,nb,step))
     #for i in range(0,nb):
     #    results2.append(testRecu(n,i+1,nb,step))
-    for i in range(0,nb):
-        results3.append(testLoga(n,i+1,nb,step))
+    #for i in range(0,nb):
+    #    results3.append(testLoga(n,i+1,nb,step))
     print("PLOTTING RESULTS")
     plotting(results1,results2,results3,n,nb,step)
   

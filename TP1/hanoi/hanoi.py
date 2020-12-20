@@ -24,13 +24,13 @@ def hanoiExecution(n:int):
     end = timer()
     return (end-start)
 
-#Run one test and return the results and write them to the disk
+#Run one test and return the results and write it to the disk
 #n data,id ,nb number of test,step is the step between each n
 def test(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
     with open(f'hanoi_results_n{id}.txt','w') as f:
-        print(f'Runtime of the hanoi program for n going from 0 to {n}\n', file=f)
+        print(f'Runtime of the hanoi program for n going from 1 to {n}\n', file=f)
         start = timer()
         for i in range(1,n+step,step):
             runtime = hanoiExecution(i)
@@ -47,15 +47,29 @@ def plotting(results,n:int,nb:int,step:int):
     #Setting up the plot
     fig, (ax1,ax2) = plt.subplots(1,2)
     x1 = range(1,n+step,step)
-    
+
+    #Calcul moyenne de tout les tests
+    moyenne = []
+    calulMoyenne = 0
+    for i in range(0,len(x1)):
+        for j in range(0,nb):
+            calculMoyenne = calulMoyenne  + results[j][i]
+        calculMoyenne / nb
+        moyenne.append(calculMoyenne)
+    with open(f'hanoi_moyenne.txt','w') as f:
+        print(f'Average runtime of the hanoi program for n going from 1 to {n} with {nb} tests\n', file=f)
+        for i in range(0,len(x1)):
+            print(f"n = {i*step}\tRuntime = {moyenne[i]}", file=f)
+
     #Plotting our results
-    for i in range(0,nb):	
-        ax1.plot(x1,results[i], label=f'test n°{i+1}')
+    #for i in range(0,nb):	
+    #    ax1.plot(x1,results[i], label=f'test n°{i+1}')
+    ax1.plot(x1,moyenne,label=f'moyenne de {nb} tests')
     ax1.set(xlabel=f'n with a step of {step}', ylabel='time (s)',
-    title='Hanoi complexity test')
+    title='Hanoi')
     ax1.legend()
     ax1.grid()
-    
+
     # Reference graph (theoric complexity)
     y2 = []
     for i in range (1,n+step,step) :

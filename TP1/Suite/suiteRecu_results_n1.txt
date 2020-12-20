@@ -1,3 +1,0 @@
-Runtime of the suite program for n going from 0 to 1000
-
-n = 0	Runtime = 8.979995982372202e-07

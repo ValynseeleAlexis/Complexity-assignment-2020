@@ -97,7 +97,7 @@ def testRecu(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
     with open(f'suiteRecu_results_n{id}.txt','w') as f:
-        print(f'Runtime of the suite program for n going from 0 to {n}\n', file=f)
+        print(f'Runtime of the fibonacci program for n going from 0 to {n}\n', file=f)
         start = timer()
         for i in range(0,n+step,step):
             runtime = suiteRecuExecution(i)
@@ -115,7 +115,7 @@ def testIteratif(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
     with open(f'suiteIteratif_results_n{id}.txt','w') as f:
-        print(f'Runtime of the suite program for n going from 0 to {n}\n', file=f)
+        print(f'Runtime of the fibonacci program for n going from 0 to {n}\n', file=f)
         start = timer()
         for i in range(0,n+step,step):
             runtime = suiteIteratifExecution(i)
@@ -131,7 +131,7 @@ def testLoga(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
     with open(f'suiteLoga_results_n{id}.txt','w') as f:
-        print(f'Runtime of the suite program for n going from 0 to {n}\n', file=f)
+        print(f'Runtime of the fibonacci program for n going from 0 to {n}\n', file=f)
         start = timer()
         for i in range(0,n+step,step):
             runtime = suiteLogaExecution(i)
@@ -168,7 +168,7 @@ def plotting(results1,results2,results3,n:int,nb:int,step:int):
         #moyenne2.append(calculMoyenne2)
         #moyenne3.append(calculMoyenne3)
     with open(f'suiteLogarithmique_moyenne.txt','w') as f:
-        print(f'Average runtime of the hanoi program for n going from 0 to {n} with {nb} tests\n', file=f)
+        print(f'Average runtime of the fibonacci program for n going from 0 to {n} with {nb} tests\n', file=f)
         for i in range(0,len(x1)):
             print(f"n = {i*step}\tRuntime = {moyenne1[i]}", file=f)
 

@@ -41,7 +41,7 @@ def test(n:int,id:int,nb:int,step:int):
     n = int(n)
     results = []
     with open(f'CribleEratosthenes_results_n{id}.txt','w') as f:
-        print(f'Runtime of the Eratosthenes for n going from 0 to {n}\n', file=f)
+        print(f'Runtime of the Eratosthenes for n going from 2 to {n+2}\n', file=f)
         start = timer()
         for i in range(2,n+step,step):
             runtime = EratostehnesExecution(i)
@@ -59,9 +59,23 @@ def plotting(results,n:int,nb:int,step:int):
     fig, (ax1,ax2) = plt.subplots(1,2)
     x1 = range(2,n+step,step)
     
+    #Calcul moyenne de tout les tests
+    moyenne = []
+    calulMoyenne = 0
+    for i in range(0,len(x1)):
+        for j in range(0,nb):
+            calculMoyenne = calulMoyenne  + results[j][i]
+        calculMoyenne / nb
+        moyenne.append(calculMoyenne)
+    with open(f'eratosthene_moyenne.txt','w') as f:
+        print(f'Average runtime of the eratosthene program for n going from 0 to {n+2} with {nb} tests\n', file=f)
+        for i in range(0,len(x1)):
+            print(f"n = {(i*step)+2}\tRuntime = {moyenne[i]}", file=f)
+
     #Plotting our results
-    for i in range(0,nb):	
-        ax1.plot(x1,results[i], label=f'test Eratosthenes n°{i+1}')
+    #for i in range(0,nb):	
+        #ax1.plot(x1,results[i], label=f'test Eratosthenes n°{i+1}')
+    ax1.plot(x1,moyenne,label=f'moyenne de {nb} tests')
     ax1.set(xlabel=f'n with a step of {step}', ylabel='time (s)',
     title='Eratosthenes complexity test')
     ax1.legend()

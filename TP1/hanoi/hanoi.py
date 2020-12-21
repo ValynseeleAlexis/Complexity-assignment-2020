@@ -63,7 +63,7 @@ def plotting(results,n:int,nb:int,step:int):
 
     #Plotting our results
     #for i in range(0,nb):	
-    #    ax1.plot(x1,results[i], label=f'test n°{i+1}')
+        #ax1.plot(x1,results[i], label=f'test n°{i+1}')
     ax1.plot(x1,moyenne,label=f'moyenne de {nb} tests')
     ax1.set(xlabel=f'n with a step of {step}', ylabel='time (s)',
     title='Hanoi')
@@ -74,10 +74,10 @@ def plotting(results,n:int,nb:int,step:int):
     y2 = []
     for i in range (1,n+step,step) :
         #Choisir la fonction de référence ici
-        y2.append(pow(i,2))
+        y2.append(pow(2,i))
     ax2.plot(x1,y2)
     ax2.set(xlabel='n', ylabel='time (s)',
-    title='O(n^2)')
+    title='O(2^n)')
     ax2.grid()
     
     #Saving results

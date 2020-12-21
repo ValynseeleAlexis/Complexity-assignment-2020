@@ -51,8 +51,9 @@ def quatreEnsemble(couple):
     resultat.append(couple[0] * couple[1])
     if couple[0] - couple[1] >= 0:
         resultat.append(couple[0] - couple[1])
-    if couple[0] % couple[1] == 0:
-        resultat.append(int(couple[0] / couple[1]))
+    if(couple[1]!=0):
+        if couple[0] % couple[1] == 0:
+            resultat.append(int(couple[0] / couple[1]))
     return resultat
 
 def constructionQuatreEnsembles(couples:Iterable):
@@ -63,42 +64,45 @@ def constructionQuatreEnsembles(couples:Iterable):
 
 
 
-def constructionPN2emeEtat(Pn,pn1):
+def constructionSousEtat(Pn,pn1,cible):
     incr=0
     excess=0
     for i in range(0,len(pn1)):
-        if(i!=0 and (i%5)==0):
+        if(i!=0 and (i%(len(Pn)-1))==0):
             incr+=1
             excess=0
-        if(i%6==0):
+        if(i%len(Pn)==0):
             excess+=1
         elemDel1 = Pn[incr]
-        elemDel2 = Pn[i%5+excess]
-        print("e1 : "+str(elemDel1)+" / e2 : "+str(elemDel2))
+        elemDel2 = Pn[(i%(len(Pn)-1))+excess]
 
         for j in range(0,len(pn1[i])):
             result = Pn.copy()
             result.remove(elemDel1)
             result.remove(elemDel2)
             result.append(pn1[i][j])
-            print(str(result) + str("\n"))
+
+            constructionSousEnsemble(result.copy(),cible)
 
 
+
+
+def constructionSousEnsemble(Pn,cible):
+    if(len(Pn)==1 and Pn[0]==cible):
+        print(Pn)
+    else:
+        couples = constructionCouples(Pn)
+        pn_1 = constructionQuatreEnsembles(couples)
+        constructionSousEtat(Pn,pn_1,cible)
 
 # Handling argv and running main      
 if __name__ == "__main__":
     pn,cible = tirage()
     couples = constructionCouples(pn)
     couples = list(couples) #On obtient une liste de tuples (les couples de permutations)
-
     print("pn = "+str(pn))
     print("cible = "+str(cible))
-
-    print("les couples Pn sont:\n")
-    print(couples)
-
-    print("les couples Pn - 1 sont :\n")
     pn_1 = constructionQuatreEnsembles(couples)
-    print(pn_1)
     print("\n\n\n")
-    constructionPN2emeEtat(pn,pn_1)
+    constructionSousEtat(pn,pn_1,cible)
+    print("test")

@@ -4,6 +4,7 @@
 
 import random
 from typing import Iterable
+from timeit import default_timer as timer
 
 #Pour créer tout les couples
 def permutations(iterable, r=None):
@@ -41,10 +42,11 @@ def tirage():
 
     return pn,cible
 
-#Question 1 : construire tout les couples (pi,pj) de Pn
+#Question 1 : construire tous les couples (pi,pj) de Pn
 def constructionCouples(pn:Iterable):
     return permutations(pn,2)
 
+#Contruit tous les résultats des combinaisons d'opérations possibles pour un couple
 def quatreEnsemble(couple):
     resultat = []
     resultat.append(couple[0] + couple[1])
@@ -55,7 +57,7 @@ def quatreEnsemble(couple):
         if couple[0] % couple[1] == 0:
             resultat.append(int(couple[0] / couple[1]))
     return resultat
-
+#met les résultats obtenus precedant  pour tous les couples dans un tableau
 def constructionQuatreEnsembles(couples:Iterable):
     resultat = []
     for i in couples:
@@ -63,8 +65,8 @@ def constructionQuatreEnsembles(couples:Iterable):
     return resultat
 
 
-
-def constructionSousEtat(Pn,pn1,cible):
+#Construit les nouveaux ensemble avec l'ajout des résultats des differentes opérations tout en enlevant le couple ayant permis ce resultat
+def constructionEnsemble(Pn,pn1,cible,tabOperation):
     incr=0
     excess=0
     for i in range(0,len(pn1)):
@@ -81,28 +83,45 @@ def constructionSousEtat(Pn,pn1,cible):
             result.remove(elemDel1)
             result.remove(elemDel2)
             result.append(pn1[i][j])
+            tabOperation.append([elemDel1,elemDel2,j])
+            constructionSousEnsemble(result.copy(),cible,tabOperation)
+            tabOperation.remove([elemDel1,elemDel2,j])
 
-            constructionSousEnsemble(result.copy(),cible)
 
 
 
-
-def constructionSousEnsemble(Pn,cible):
+def constructionSousEnsemble(Pn,cible,tabOperation):
     if(len(Pn)==1 and Pn[0]==cible):
         print(Pn)
+        print(tabOperation)
+        end = timer()
+        print(end-start)
+        exit()
     else:
         couples = constructionCouples(Pn)
         pn_1 = constructionQuatreEnsembles(couples)
-        constructionSousEtat(Pn,pn_1,cible)
+        constructionEnsemble(Pn,pn_1,cible,tabOperation)
 
-# Handling argv and running main      
-if __name__ == "__main__":
-    pn,cible = tirage()
+     
+def exploration(pn,cible):
+    tabOperation=[]
+    
     couples = constructionCouples(pn)
     couples = list(couples) #On obtient une liste de tuples (les couples de permutations)
-    print("pn = "+str(pn))
-    print("cible = "+str(cible))
+    
     pn_1 = constructionQuatreEnsembles(couples)
-    print("\n\n\n")
-    constructionSousEtat(pn,pn_1,cible)
-    print("test")
+    constructionEnsemble(pn,pn_1,cible,tabOperation)
+
+start = timer()
+def main():
+    pn,cible = tirage()
+    print("pn = "+str(pn))
+    print("cible = "+str(cible)+"\n")
+    exploration(pn,cible)
+    print("parcouru sans rien trouve")
+    end = timer()
+    print(end-start)
+    return 
+
+
+main()

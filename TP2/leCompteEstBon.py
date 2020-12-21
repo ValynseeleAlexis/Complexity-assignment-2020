@@ -61,6 +61,30 @@ def constructionQuatreEnsembles(couples:Iterable):
         resultat.append(quatreEnsemble(i))
     return resultat
 
+
+
+def constructionPN2emeEtat(Pn,pn1):
+    incr=0
+    excess=0
+    for i in range(0,len(pn1)):
+        if(i!=0 and (i%5)==0):
+            incr+=1
+            excess=0
+        if(i%6==0):
+            excess+=1
+        elemDel1 = Pn[incr]
+        elemDel2 = Pn[i%5+excess]
+        print("e1 : "+str(elemDel1)+" / e2 : "+str(elemDel2))
+
+        for j in range(0,len(pn1[i])):
+            result = Pn.copy()
+            result.remove(elemDel1)
+            result.remove(elemDel2)
+            result.append(pn1[i][j])
+            print(str(result) + str("\n"))
+
+
+
 # Handling argv and running main      
 if __name__ == "__main__":
     pn,cible = tirage()
@@ -76,3 +100,5 @@ if __name__ == "__main__":
     print("les couples Pn - 1 sont :\n")
     pn_1 = constructionQuatreEnsembles(couples)
     print(pn_1)
+    print("\n\n\n")
+    constructionPN2emeEtat(pn,pn_1)
